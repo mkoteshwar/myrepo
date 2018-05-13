@@ -1,0 +1,69 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xmlns:bi="urn:l1id.com:BiometricIdentification"
+       xmlns:spring-security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+        http://camel.apache.org/schema/spring-security http://camel.apache.org/schema/spring-security/camel-spring-security.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <bean id="properties" class="org.apache.camel.component.properties.PropertiesComponent">
+        <property name="location" value="file:${env:JBOSS_HOME}/standalone/configuration/environment.properties" />
+    </bean>
+
+    <!-- Uses the realm proprties file to authenticate user and determine user's role -->
+    <bean id="fileLoginService" class="org.eclipse.jetty.security.HashLoginService">
+        <property name="name" value="basicAuthRealm" />
+        <property name="config" value="{{basicAuthRealmProperties}}" />
+        <property name="refreshInterval" value="0" />
+    </bean>
+
+    <!-- Contrains the associated endpoint to allow only the roles listed here -->
+    <bean id="constraint" class="org.eclipse.jetty.util.security.Constraint">
+        <property name="name" value="BASIC" />
+        <property name="roles" value="ROLE_USER" />
+        <property name="authenticate" value="true" />
+    </bean>
+    
+    <!-- Multiple constraints can be used to secure different endpoint URLs using this mapping -->
+    <bean id="constraintMapping" class="org.eclipse.jetty.security.ConstraintMapping">
+        <property name="constraint" ref="constraint" />
+        <property name="pathSpec" value="/*" />
+    </bean>
+    
+    <!-- The security handler is a type of context which ties the associated endpoint with all of the above -->
+    <bean id="securityHandler" class="org.eclipse.jetty.security.ConstraintSecurityHandler">
+        <property name="authenticator">
+            <bean class="org.eclipse.jetty.security.authentication.BasicAuthenticator" />
+        </property>
+        <property name="constraintMappings">
+            <list>
+                <ref bean="constraintMapping" />
+            </list>
+        </property>
+        <property name="loginService" ref="fileLoginService"/>
+    </bean>
+
+    <!-- For SSL, technically not required for basic auth but almost always used together -->    
+    <sslContextParameters id="sslContextParams"
+        xmlns="http://camel.apache.org/schema/spring">
+        <keyManagers keyPassword="{{privatekey.password}}">
+            <keyStore resource="{{jksfile}}" password="{{jksfile.password}}" />
+        </keyManagers>
+    </sslContextParameters>
+
+    <camelContext id="example-basic-auth-consumer-camel-context" xmlns="http://camel.apache.org/schema/spring" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:l1id.com:ImageServer" xmlns:urn1="urn:digimarc.com:imaging" xmlns:urn2="urn:digimarc.com:SchemaTypes">
+        
+        <!-- In almost every instance, you'll use basic auth with SSL like we have here. -->
+        <route streamCache="true">
+            <from uri="jetty:https://0.0.0.0:25002/example/basicauthandssl?sslContextParameters=#sslContextParams&amp;handlers=securityHandler&amp;matchOnUriPrefix=true"/>
+            <transform>
+                <constant>Basic auth and SSL is working!</constant>
+            </transform>
+        </route>
+
+    </camelContext>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<enunciate label="wfm-processor-web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://enunciate.webcohesion.com/schemas/enunciate-2.8.0.xsd">
+
+	<modules>
+		<!-- Docs -->
+		<docs splashPackage="com.morphotrust.wfm.processor.web.api"
+			title="i3bo-camel" copyright="CUSTOMER" includeExampleJson="true" forceExampleJson="true" />
+		<jackson1 dateFormat="string"/>
+		<jackson1 disabled="false"/>
+		<jaxb disabled="true"/>
+		<jaxrs disabled="false"/>
+		<spring-web disabled="true"/>
+		<jackson disabled="true"/>
+		<jaxws disabled="true"/>
+	</modules>
+</enunciate>
