@@ -19,6 +19,14 @@ To setup and configure the Wildfly-camel patch please follow the documentation a
 
 Once the Wildly-Camel patch is started in standalone mode as in documentation, it is time to setup another server with the Wildly-Camel configuration within JBDS. Follow the same process to create a server. But select the “Wildfly with Camel” configuration in the respective window in the process wizard flow, see screenshot below.
 ￼
-![alt text](../../docimg/wildfly-with-camel-config.png "Logo Title Text 1")
+![alt text](../../docimg/wildfly-with-camel-config.png "Wildfly camel config image missing")
 
-This will create a Wildfly server with Camel integrated. We will be deploying i3bo-camel web app project to this server.
+This will create a Wildfly server with Camel integrated. We will be deploying i3bo-camel web app project to this server. Ensure that the http end-point is available at http://localhost:8080 and http-ssl end point in available at  https://localhost:8443; with the https end-point the browser will warn you that website is not secure, this is due to the fact that the certificate is a self-signed one. Ignore the same and proceed to the site. The same WildFly home page received at http end-point should be available here also.
+
+# Importing the web app
+
+As the webapp is based on maven, the same can be imported into the IDE using the import maven option. Do a maven update to ensure that all maven libraries are downloaded and the web app is built without errors.
+
+In the webapp there are 2 camel context files. The files have references to properties file environment.properties. Ensure that the file is available in the respective path. If you are starting the server from within the JBDS then ensure that the JBOSS_HOME is set to the right path in the launch configuration (see image). If you are starting the server from CLI using the batch/shell scripts then the JBOSS_HOME should be determined automatically by the script.
+
+![alt text](../../docimg/jboss-home-path.png "JBoss Home Path image missing")
