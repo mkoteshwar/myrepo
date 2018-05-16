@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>war</packaging>
-    
-    <groupId>issuance</groupId>
-    <artifactId>i3bo-camel</artifactId>
-    <version>1.3.0</version>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>war</packaging>
 
-    <properties>
+	<groupId>issuance</groupId>
+	<artifactId>i3bo-camel</artifactId>
+	<version>1.3.0</version>
+
+	<properties>
 		<version.war.plugin>3.0.0</version.war.plugin>
-    </properties>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -19,48 +19,58 @@
 			<artifactId>camel-restlet</artifactId>
 			<version>2.19.3</version>
 		</dependency>
-	    <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jetty</artifactId>
-            <version>2.19.3</version>
-        </dependency>      
-        <dependency>
-		    <groupId>org.eclipse.jetty</groupId>
-		    <artifactId>jetty-util</artifactId>
-		    <version>9.3.14.v20161028</version>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jetty</artifactId>
+			<version>2.19.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>9.3.14.v20161028</version>
 		</dependency>
 	</dependencies>
-	
-    <build>
-        <plugins>
+
+	<build>
+		<plugins>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
 					<loginServices>
-						<loginService implementation="org.eclipse.jetty.security.HashLoginService">
+						<loginService
+							implementation="org.eclipse.jetty.security.HashLoginService">
 							<name>basicAuthRealm</name>
-							<config>${basedir}/src/main/resources/realm.properties</config>
+							<config>${basedir}/src/main/resources/basicAuthRealm.properties</config>
 						</loginService>
 					</loginServices>
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
-                <configuration>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20.1</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.war.plugin}</version>
+				<configuration>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
