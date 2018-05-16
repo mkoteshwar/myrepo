@@ -15,9 +15,9 @@
     </bean>
 
     <!-- Uses the realm proprties file to authenticate user and determine user's role -->
-    <bean id="fileLoginService" class="org.eclipse.jetty.security.HashLoginService">
+    <bean id="fileLoginService" class="org.eclipse.jetty.security.HashLoginService" >
         <property name="name" value="basicAuthRealm" />
-        <property name="config" value="{{basicAuthRealmProperties}}" />
+        <property name="config" value="/Applications/wildfly-10.1.0.Final/standalone/configuration/basicAuthRealm.properties" />
         <property name="refreshInterval" value="0" />
     </bean>
 
