@@ -19,4 +19,6 @@ To setup and configure the Wildfly-camel patch please follow the documentation a
 
 Once the Wildly-Camel patch is started in standalone mode as in documentation, it is time to setup another server with the Wildly-Camel configuration within JBDS. Follow the same process to create a server. But select the “Wildfly with Camel” configuration in the respective window in the process wizard flow, see screenshot below.
 ￼
+![alt text](../../docimg/wildfly-with-camel-config.png "Logo Title Text 1")
+
 This will create a Wildfly server with Camel integrated. We will be deploying i3bo-camel web app project to this server.
