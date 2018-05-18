@@ -102,15 +102,22 @@ public class CamelRestClientTest {
     }
 
     /**
-     * Test method which executes the runRequest method that calls the RESTful helloworld-rs web service.
+     * Test method which executes the runRequest method that calls the RESTful service over https
      */
     @Test
-    public void test() {
+    public void testSsl() {
         assertEquals("XML Response", CamelRestClientTest.SSL_ONLY_RESPONSE,
             this.runRequest(CamelRestClientTest.SSL_URL, MediaType.TEXT_PLAIN_TYPE));
 
+    }
+    
+    /**
+     * Test method which executes the runRequest method that calls the RESTful service over https with Auth
+     */
+    @Test
+    public void testSslWithAuth() {
         assertEquals("JSON Response", CamelRestClientTest.SSL_WITH_AUTH_RESPONSE,
-            this.runRequest(CamelRestClientTest.SSL_WITH_AUTH_URL, MediaType.TEXT_PLAIN_TYPE));
+                this.runRequest(CamelRestClientTest.SSL_WITH_AUTH_URL, MediaType.TEXT_PLAIN_TYPE));    	
     }
 
     /**
