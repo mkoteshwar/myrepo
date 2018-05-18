@@ -102,6 +102,18 @@
 							<skip>false</skip>
 							<systemProperties>
 								<property>
+									<name>sslMutCertUrl</name>
+									<value>https://localhost:25001/camel-sample-rest/rest/say/hello</value>
+								</property>
+								<property>
+									<name>trustStore</name>
+									<value>/Applications/wildfly-10.1.0.Final/standalone/configuration/clientCert.p12</value>
+								</property>
+								<property>
+									<name>trustStorePassword</name>
+									<value>secretwf</value>
+								</property>
+								<property>
 									<name>sslUrl</name>
 									<value>https://localhost:25002/camel-sample-rest/rest/say/hello</value>
 								</property>

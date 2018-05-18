@@ -39,7 +39,7 @@
     	<route>
     		<from uri="direct:hello"/>
     		<transform>
-      			<constant>Hello REST World</constant>
+      			<constant>Hello REST World with Mutual Cert</constant>
     		</transform>
     	</route>     
         <route streamCache="true">
