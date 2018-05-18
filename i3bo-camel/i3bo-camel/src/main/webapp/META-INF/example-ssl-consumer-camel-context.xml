@@ -12,6 +12,10 @@
 
     <sslContextParameters id="sslContextParams"
         xmlns="http://camel.apache.org/schema/spring">
+		<serverParameters clientAuthentication="REQUIRE" />
+		<trustManagers>
+			<keyStore resource="{{truststorefile}}" password="{{truststorefile.password}}" />
+		</trustManagers> 
         <keyManagers keyPassword="{{privatekey.password}}">
             <keyStore resource="{{jksfile}}" password="{{jksfile.password}}" />
         </keyManagers>
