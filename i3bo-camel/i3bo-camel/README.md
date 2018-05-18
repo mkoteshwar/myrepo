@@ -48,6 +48,6 @@ The site to should present a login window where you can enter the username and p
 
 Now we can proceed to verify whether a Java client can connect to these REST end-points.
 
-This is done in the came-rest-client project in the root of this GitHUb repo. Please import the project into JBDS and run the same using command 'mvn clean package'. The build should succeed. Go through the comments to see that 2 outputs which show that the SSL call and the SSL with AUTH call has succeeded.
+This is done in the camel-rest-client project in the root of this GitHUb repo. Please import the project into JBDS and run the same using command 'mvn clean package'. The build should succeed. Go through the comments to see that 2 outputs which show that the SSL call and the SSL with AUTH call has succeeded.
     
 
