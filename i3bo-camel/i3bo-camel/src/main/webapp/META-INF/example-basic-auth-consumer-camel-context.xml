@@ -31,7 +31,7 @@
     <!-- Multiple constraints can be used to secure different endpoint URLs using this mapping -->
     <bean id="constraintMapping" class="org.eclipse.jetty.security.ConstraintMapping">
         <property name="constraint" ref="constraint" />
-        <property name="pathSpec" value="/*" />
+        <property name="pathSpec" value="/camel-sample-rest/rest/say/secure/*" />
     </bean>
     
     <!-- The security handler is a type of context which ties the associated endpoint with all of the above -->
@@ -56,8 +56,34 @@
     </sslContextParameters>
 
     <camelContext id="example-basic-auth-consumer-camel-context" xmlns="http://camel.apache.org/schema/spring" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:l1id.com:ImageServer" xmlns:urn1="urn:digimarc.com:imaging" xmlns:urn2="urn:digimarc.com:SchemaTypes">
+		<restConfiguration component="jetty" contextPath="/camel-sample-rest/rest" port="25002" scheme="https">
+        	<endpointProperty key="sslContextParameters" value="#sslContextParams"/>
+        	<endpointProperty key="handlers" value="securityHandler"/>
+        </restConfiguration>        
         
         <!-- In almost every instance, you'll use basic auth with SSL like we have here. -->
+        <rest path="/say">
+   			<get uri="/hello" produces="text/plain">
+      			<to uri="direct:hello"/>
+    		</get>
+    	</rest>
+    	<rest path="/say">
+   			<get uri="/secure/hello" produces="text/plain">
+      			<to uri="direct:securehello"/>
+    		</get>
+    	</rest>
+    	<route>
+    		<from uri="direct:hello"/>
+    		<transform>
+      			<constant>Hello REST World</constant>
+    		</transform>
+    	</route>         
+    	<route>
+    		<from uri="direct:securehello"/>
+    		<transform>
+      			<constant>Hello SECURE REST World</constant>
+    		</transform>
+    	</route>         
         <route streamCache="true">
             <from uri="jetty:https://0.0.0.0:25002/example/basicauthandssl?sslContextParameters=#sslContextParams&amp;handlers=securityHandler&amp;matchOnUriPrefix=true"/>
             <transform>

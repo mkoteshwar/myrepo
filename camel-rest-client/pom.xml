@@ -103,11 +103,11 @@
 							<systemProperties>
 								<property>
 									<name>sslUrl</name>
-									<value>https://localhost:25001/example/ssl</value>
+									<value>https://localhost:25002/camel-sample-rest/rest/say/hello</value>
 								</property>
 								<property>
 									<name>sslWithAuthUrl</name>
-									<value>https://localhost:25002/example/basicauthandssl</value>
+									<value>https://localhost:25002/camel-sample-rest/rest/say/secure/hello</value>
 								</property>
 							</systemProperties>
 						</configuration>

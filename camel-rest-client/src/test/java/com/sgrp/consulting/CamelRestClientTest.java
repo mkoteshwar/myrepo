@@ -49,8 +49,8 @@ public class CamelRestClientTest {
     /**
      * Responses of the RESTful web service
      */
-    private static final String SSL_ONLY_RESPONSE = "SSL is working";
-    private static final String SSL_WITH_AUTH_RESPONSE = "Basic auth and SSL is working!";
+    private static final String SSL_ONLY_RESPONSE = "Hello REST World";
+    private static final String SSL_WITH_AUTH_RESPONSE = "Hello SECURE REST World";
    
     /**
     * Returns a http client that will not do any certificate validation

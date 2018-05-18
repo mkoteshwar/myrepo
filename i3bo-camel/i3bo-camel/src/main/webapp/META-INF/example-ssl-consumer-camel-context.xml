@@ -18,8 +18,10 @@
     </sslContextParameters>
 
     <camelContext id="example-ssl-consumer-camel-context" xmlns="http://camel.apache.org/schema/spring" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:l1id.com:ImageServer" xmlns:urn1="urn:digimarc.com:imaging" xmlns:urn2="urn:digimarc.com:SchemaTypes">
-<!--         <restConfiguration component="undertow" contextPath="/camel-sample-rest/rest"/> -->
-        <restConfiguration component="jetty" contextPath="/camel-sample-rest/rest" port="25001"/>
+	<!--<restConfiguration component="undertow" contextPath="/camel-sample-rest/rest"/>-->
+        <restConfiguration component="jetty" contextPath="/camel-sample-rest/rest" port="25001" scheme="https">
+        	<endpointProperty key="sslContextParameters" value="#sslContextParams"></endpointProperty>
+        </restConfiguration>
         <rest path="/say">
    			<get uri="/hello" produces="text/plain">
       			<to uri="direct:hello"/>
