@@ -23,7 +23,7 @@ Once the Wildly-Camel patch is started in standalone mode as in documentation, i
 
 This will create a Wildfly server with Camel integrated. We will be deploying i3bo-camel web app project to this server. Ensure that the http end-point is available at http://localhost:8080 and http-ssl end point in available at  https://localhost:8443; with the https end-point the browser will warn you that website is not secure, this is due to the fact that the certificate is a self-signed one. Ignore the same and proceed to the site. The same WildFly home page received at http end-point should be available here also.
 
-# Importing the web app and deploying it to Wildfly
+## Importing the web app and deploying it to Wildfly
 
 As the webapp is based on maven, the same can be imported into the IDE using the import maven option. Do a maven update to ensure that all maven libraries are downloaded and the web app is built without errors.
 
@@ -52,7 +52,7 @@ This is done in the camel-rest-client project in the root of this GitHUb repo. P
     
 ### Note: Generation of self-signed certificates
 
-Generation of self-signed certificates has to be done and they need to available to the applications from their respective directories from an access point of view. Please refer to the following [link](https://github.com/wildfly/quickstart/tree/10.x/helloworld-war-ssl) for generating the self-signed certificates and related files. My experience is that it is easier to user the java Keytool rather than OpenSSL, but it is ones own preference I would say. Please ensure that the password to the various certificates and keystores are noted down so that they can be used in the config files when required. 
+Generation of self-signed certificates has to be done and they need to be available to the applications from their respective directories from an access point of view. Please refer to the following [link](https://github.com/wildfly/quickstart/tree/10.x/helloworld-war-ssl) for generating the self-signed certificates and related files. My experience is that it is easier to user the java Keytool rather than OpenSSL, but it is ones own preference I would say. Please ensure that the password to the various certificates and keystores are noted down so that they can be used in the config files when required. 
 
 The certificate related files referred in this sample are as follows. The references are also specified in the environment.properties and the camel-context files.
 
